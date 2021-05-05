@@ -1,0 +1,13 @@
+com\designal\vacc\domain\Role.class
+com\designal\vacc\domain\AllocationCity.class
+com\designal\vacc\domain\Vacc_Category.class
+com\designal\vacc\domain\Record.class
+com\designal\vacc\domain\City.class
+com\designal\vacc\domain\Admin.class
+com\designal\vacc\domain\Pre_vacc.class
+com\designal\vacc\domain\Province.class
+com\designal\vacc\domain\Permission.class
+com\designal\vacc\domain\UserInfo.class
+com\designal\vacc\domain\RequestMess.class
+com\designal\vacc\domain\Vaccine.class
+com\designal\vacc\domain\VaccineCity.class

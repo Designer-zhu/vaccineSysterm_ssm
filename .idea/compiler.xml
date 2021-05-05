@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="vaccineSystem_domain" />
+        <module name="vaccineSystem_vo" />
+        <module name="vaccineSystem_web" />
+        <module name="vaccineSystem_service" />
+        <module name="vaccineSystem_dao" />
+        <module name="vaccineSystem_utils" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="vaccineSystemvo" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

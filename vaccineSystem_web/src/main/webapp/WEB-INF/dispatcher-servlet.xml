@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 1.配置扫描包 -->
+    <context:component-scan base-package="com.designal.vacc.controller"></context:component-scan>
+
+    <!-- 2.配置处理器映射器、处理器适配器 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!-- 3.配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/backstage/page/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 文件上传 -->
+    <!--<bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        &lt;!&ndash; 设置上传文件的最大尺寸为5MB &ndash;&gt;
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>-->
+
+    <!-- 4.释放静态资源 -->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/images/" mapping="/images/**" />
+    <mvc:resources location="/js/" mapping="/js/**" />
+    <mvc:resources location="/layui/" mapping="/layui/**" />
+
+    <mvc:resources location="/backstage/" mapping="/backstage/adminPage/**" />
+    <mvc:resources location="/backstage/" mapping="/backstage/css/**" />
+    <mvc:resources location="/backstage/" mapping="/backstage/fonts/**" />
+    <mvc:resources location="/backstage/" mapping="/backstage/images/**" />
+    <mvc:resources location="/backstage/" mapping="/backstage/js/**" />
+
+
+    <!--
+        5.支持AOP的注解支持，AOP底层使用代理技术
+        JDK动态代理，要求必须有接口
+        cglib代理，生成子类对象，proxy-target-class="true" 默认使用cglib的方式
+    -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>

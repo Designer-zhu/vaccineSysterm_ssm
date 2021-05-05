@@ -1,0 +1,10 @@
+com\designal\vacc\dao\IRecordMapper.class
+com\designal\vacc\dao\IAllocationMapper.class
+com\designal\vacc\dao\IPre_vaccMapper.class
+com\designal\vacc\dao\IRequestMessMapper.class
+com\designal\vacc\dao\IVaccineMapper.class
+com\designal\vacc\dao\ICityMapper.class
+com\designal\vacc\dao\IRoleMapper.class
+com\designal\vacc\dao\IAdminMapper.class
+com\designal\vacc\dao\IPermissionMapper.class
+com\designal\vacc\dao\IUserInfoMapper.class

@@ -1,0 +1,5 @@
+com\designal\vacc\vo\CodeMsg.class
+com\designal\vacc\vo\PageVo.class
+com\designal\vacc\vo\RespWriterUtil.class
+com\designal\vacc\vo\RtnError.class
+com\designal\vacc\vo\Rs.class

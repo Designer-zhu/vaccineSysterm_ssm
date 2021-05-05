@@ -1,0 +1,8 @@
+com\designal\vacc\utils\QiniuUpload.class
+com\designal\vacc\utils\DataSourceUtils.class
+com\designal\vacc\utils\CommonUtils.class
+com\designal\vacc\utils\MD5Utils.class
+com\designal\vacc\utils\UserDateConverter.class
+com\designal\vacc\utils\VariableName.class
+com\designal\vacc\utils\MailUtils$1.class
+com\designal\vacc\utils\MailUtils.class
