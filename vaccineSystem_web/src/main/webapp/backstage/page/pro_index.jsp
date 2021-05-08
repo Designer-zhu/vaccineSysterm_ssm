@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix='security' uri='http://www.springframework.org/security/tags'%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -22,146 +23,107 @@
     <div class="layui-header layui-bg-cyan">
         <div class="layui-logo layui-bg-green"><a href="${path}/backstage/page/pro_index.jsp">省疾控中心</a></div>
 
-       <%-- <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item"><a href="">控制台</a></li>
-            <li class="layui-nav-item"><a href="">商品管理</a></li>
-            <li class="layui-nav-item"><a href="">用户</a></li>
-            <li class="layui-nav-item">
-                <a href="javascript:;">其它系统</a>
-                <dl class="layui-nav-child">
-                    <dd><a href="">邮件管理</a></dd>
-                    <dd><a href="">消息管理</a></dd>
-                    <dd><a href="">授权管理</a></dd>
-                </dl>
-            </li>
-        </ul>--%>
-
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item"><a onclick="index()">首页</a></li>
-
-            <%--未登录--%>
-            <c:if test="${sessionScope.pro_user == null}">
-                <li class="layui-nav-item"><a onclick="login()">登录</a></li>
-            </c:if>
-
-            <%--已登录--%>
-            <c:if test="${sessionScope.pro_user != null}">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="${sessionScope.pro_user.photo}" class="layui-nav-img">
-                            ${sessionScope.pro_user.username}
+                        <img src="${pro_user.photo}" class="layui-nav-img">
+                        ${pro_user.username}
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="${path}/backstage/page/pro_personer/pro_updatePro.jsp">基本资料</a></dd>
                         <dd><a href="${path}/backstage/page/pro_personer/pro_salfePro.jsp">安全设置</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a onclick="logout()">注销</a></li>
-            </c:if>
+            <li class="layui-nav-item"><a onclick="logout()">注销</a></li>
         </ul>
     </div>
 
     <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
     <div class="layui-side layui-bg-cyan">
         <div class="layui-side-scroll">
-
-            <%--未登录需强制登录，否则不显示内容--%>
-            <c:if test="${sessionScope.pro_user == null}">
-
-            </c:if>
-
             <%--已登录--%>
-            <c:if test="${sessionScope.pro_user != null}">
-                <ul class="layui-nav layui-nav-tree layui-bg-cyan"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree layui-bg-cyan"  lay-filter="test">
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">自助管理统计</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="${path}/backstage/page/vacc_total/vacc_totalOne.jsp">统计一</a></dd>
-                            <dd><a href="${path}/backstage/page/vacc_total/vacc_totalTwo.jsp">统计二</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">自助管理统计</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/backstage/page/vacc_total/vacc_totalOne.jsp">统计一</a></dd>
+                        <dd><a href="${path}/backstage/page/vacc_total/vacc_totalTwo.jsp">统计二</a></dd>
+                    </dl>
+                </li>
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">区域化评估管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="${path}/backstage/page/vacc_asssessment/regionalization.html">管理一</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">区域化评估管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/backstage/page/vacc_asssessment/regionalization.html">管理一</a></dd>
+                    </dl>
+                </li>
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">疫苗库存管理</a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" id="menu_three">库存盘点</a>
-                                <ol class="layui-nav-child" style="display: none;" >
-                                    <li><a href="${path}/backstage/page/vacc_category/vacc_categoryAll.jsp">全部疫苗</a></li>
-                                    <li><a href="${path}/backstage/page/vacc_category/vacc_categoryOne.jsp">一类疫苗</a></li>
-                                    <li><a href="${path}/backstage/page/vacc_category/vacc_categoryTwo.jsp">二类疫苗</a></li>
-                                </ol>
-                            </dd>
-                            <dd><a href="${path}/backstage/page/vacc_warehousing/vacc_establishment.jsp">疫苗期初建账</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">疫苗库存管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" id="menu_three">库存盘点</a>
+                            <ol class="layui-nav-child" style="display: none;" >
+                                <li><a href="${path}/backstage/page/vacc_category/vacc_categoryAll.jsp">全部疫苗</a></li>
+                                <li><a href="${path}/backstage/page/vacc_category/vacc_categoryOne.jsp">一类疫苗</a></li>
+                                <li><a href="${path}/backstage/page/vacc_category/vacc_categoryTwo.jsp">二类疫苗</a></li>
+                            </ol>
+                        </dd>
+                        <dd><a href="${path}/backstage/page/vacc_warehousing/vacc_establishment.jsp">疫苗期初建账</a></dd>
+                    </dl>
+                </li>
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">疫苗出库管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="${path}/backstage/page/vacc_delivery/vacc_issue.jsp">处理请求</a></dd>
-                            <dd><a href="${path}/backstage/page/vacc_delivery/vacc_issueRecord.jsp">下发记录</a></dd>
-                            <dd><a href="${path}/backstage/page/vacc_delivery/vacc_reflect.jsp">下发反映情况</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">疫苗出库管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/backstage/page/vacc_delivery/vacc_issue.jsp">处理请求</a></dd>
+                        <dd><a href="${path}/backstage/page/vacc_delivery/vacc_issueRecord.jsp">下发记录</a></dd>
+                        <dd><a href="${path}/backstage/page/vacc_delivery/vacc_reflect.jsp">下发反映情况</a></dd>
+                    </dl>
+                </li>
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">疫苗运输方式</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="${path}/backstage/page/vacc_transport/vacc_sto_trans.jsp">运输及保存方式</a></dd>
-                            <dd><a href="${path}/backstage/page/vacc_transport/vacc_transport.jsp">运输监管</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">疫苗运输方式</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/backstage/page/vacc_transport/vacc_sto_trans.jsp">运输及保存方式</a></dd>
+                        <dd><a href="${path}/backstage/page/vacc_transport/vacc_transport.jsp">运输监管</a></dd>
+                    </dl>
+                </li>
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">疫苗调拨管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="${path}/backstage/page/vacc_allocation/vacc_allocationRequest.jsp" target="content">调拨请求</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">疫苗调拨管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/backstage/page/vacc_allocation/vacc_allocationRequest.jsp" target="content">调拨请求</a></dd>
+                    </dl>
+                </li>
 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">疫苗报废</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="${path}/backstage/page/vacc_scrap/vaccScrap.html" target="content">报废处理细则</a></dd>
-                        </dl>
-                    </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">疫苗报废</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/backstage/page/vacc_scrap/vaccScrap.html" target="content">报废处理细则</a></dd>
+                    </dl>
+                </li>
 
-                </ul>
-            </c:if>
-
+            </ul>
         </div>
     </div>
 
     <!-- 内容主体区域 -->
     <div class="layui-body">
 
-        <%--未登录状态--%>
-        <c:if test="${sessionScope.pro_user == null}">
-            <div style="padding: 15px;">请先<a href="${path}/backstage/page/pro_login.jsp">登录</a></div>
-        </c:if>
-
         <%--已登录状态--%>
-        <c:if test="${sessionScope.pro_user != null}">
 
-            <%--title--%>
-            <%--<div id="h1">
-                <div id="h1" style="margin-left: 20px;margin-top: 10px"><h1  style="color: slategrey">欢迎您进入山西省疾控中心疫苗管理系统</h1></div>
-            </div>--%>
+        <%--title--%>
+        <%--<div id="h1">
+            <div id="h1" style="margin-left: 20px;margin-top: 10px"><h1  style="color: slategrey">欢迎您进入山西省疾控中心疫苗管理系统</h1></div>
+        </div>--%>
 
 
-            <iframe src="${path}/backstage/page/lunbotu/lb2.jsp" id="main" name="content" height="100%" width="100%">
+        <iframe src="${path}/backstage/cityPage/lunbotu/lb2.jsp" id="main" name="content" height="100%" width="100%">
 
-            </iframe>
-        </c:if>
+        </iframe>
 
     </div>
 

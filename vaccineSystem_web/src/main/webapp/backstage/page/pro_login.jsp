@@ -70,7 +70,7 @@
 			<span>请输入您的账户</span>
 		  </div>
 
-		<form action="${pageContext.request.contextPath}/user/login.action" method="post">
+		<form action="${pageContext.request.contextPath}/login.action" method="post">
 			<input type="hidden" name="identity" value="pro_user" />
 			<div class='login_fields'>
 				<div class='login_fields__user'>

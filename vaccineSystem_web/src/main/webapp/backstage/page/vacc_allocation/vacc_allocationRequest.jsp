@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <html>
 <head>
     <title>调拨请求</title>
@@ -9,6 +10,8 @@
     <script src="${pageContext.request.contextPath}/backstage/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+<security:authorize access="hasRole('ADMIN')">
+
     <%-- 隐藏域：存储项目发布路径 --%>
     <input type="hidden" id="path" value="${pageContext.request.contextPath}" />
 
@@ -79,8 +82,8 @@
                 <div class="layui-input-inline">
                     <select name="allocationCity" id="allocationCity" lay-filter="bigType">
                         <option id="city" value="" selected>--请选择--</option>
-                        <option  value="xi_an">西安市疾控中心</option>
-                        <option  value="xian_yang">咸阳市疾控中心</option>
+                        <option  value="xi_an">太原市疾控中心</option>
+                        <option  value="xian_yang">大同市疾控中心</option>
                     </select>
                 </div>
             </div>
@@ -98,6 +101,7 @@
         </div>
 
     </script>
+</security:authorize>
 
     <script>
         layui.use(['form', 'jquery', 'table', 'layer', 'util','laydate'], function(){

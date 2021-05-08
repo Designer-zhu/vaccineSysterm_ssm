@@ -30,11 +30,11 @@ public class UserInfoService implements IUserInfoService {
     @Autowired
     private IUserInfoMapper userInfoMapper;
 
-   /* @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;*/
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //注册
-    /*@Override
+    @Override
     public boolean register(UserInfo userInfo) {
         //密码加密存储
         userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
@@ -45,18 +45,13 @@ public class UserInfoService implements IUserInfoService {
             return userInfoMapper.insertOneTwo(userInfo)>0;
         }
         return false;
-    }*/
+    }
 
     /*public static void main(String[] args) {
         BCryptPasswordEncoder by = new BCryptPasswordEncoder();
         String encode = by.encode("111111");
         System.out.println(encode);
     }*/
-
-    @Override
-    public boolean register(UserInfo userInfo) {
-        return false;
-    }
 
     //激活验证
     @Override
@@ -97,16 +92,15 @@ public class UserInfoService implements IUserInfoService {
 
     //登录(pro_user)
     //认证
-    /*@Override
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserInfo userInfo = userInfoMapper.selectProOneByUsername(username);
         User user = new User(username, userInfo.getPassword(),
-                userInfo.getState() == 1 ? true : false,
-                true, true, true,
+                userInfo.getState()==1?true:false,true,true,true,
                 getAuthorities(userInfo.getRoles()));
         return user;
 
-    }*/
+    }
 
     //根据当前用户所有角色的名称，拼接
     public Collection<? extends GrantedAuthority> getAuthorities(List<Role> roles){
@@ -120,12 +114,12 @@ public class UserInfoService implements IUserInfoService {
 
     //根据用户id查询用户信息
     @Override
-    public UserInfo viewOneByUser_id(String user_id, String identity) {
+    public UserInfo viewOneByUserId(Integer userId, String identity) {
         //判断用户类型
         if(identity.equals("pro_user")){
-            return userInfoMapper.selectOneOne2(user_id);
+            return userInfoMapper.selectOneOne2(userId);
         }else if(identity.equals("city_user")){
-            return userInfoMapper.selectOneTwo2(user_id);
+            return userInfoMapper.selectOneTwo2(userId);
         }
         return null;
     }
@@ -152,5 +146,17 @@ public class UserInfoService implements IUserInfoService {
     @Override
     public List<UserInfo> viewCityUserList() {
         return userInfoMapper.selectCityUserList();
+    }
+
+    //查看剩余角色列表的用户信息
+    @Override
+    public UserInfo selectOtherRoleListByUserId(Integer userId) {
+
+        return userInfoMapper.selectOtherRoleListByUserId(userId);
+    }
+
+    @Override
+    public UserInfo selectProOneByUsername(String username) {
+        return userInfoMapper.selectOneByUsernameOne(username);
     }
 }

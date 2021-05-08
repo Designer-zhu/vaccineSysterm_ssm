@@ -9,6 +9,7 @@ com\designal\vacc\controller\AdminController.class
 com\designal\vacc\controller\UserInfoController.class
 com\designal\vacc\controller\vaccineController.class
 com\designal\vacc\controller\PreController.class
+com\designal\vacc\controller\UserInfoController$1.class
 com\designal\vacc\controller\TransportController.class
 com\designal\vacc\controller\CityController.class
 com\designal\vacc\controller\RequestMessController.class

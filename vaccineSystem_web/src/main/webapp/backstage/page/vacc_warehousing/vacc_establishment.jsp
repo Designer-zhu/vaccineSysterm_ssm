@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <html>
 <head>
     <title>疫苗初期建账</title>
@@ -9,6 +10,8 @@
     <script src="${pageContext.request.contextPath}/backstage/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+<security:authorize access="hasRole('ADMIN')">
+
     <%-- 隐藏域：存储项目发布路径 --%>
     <input type="hidden" id="path" value="${pageContext.request.contextPath}" />
 
@@ -74,8 +77,8 @@
                     <select name="province" lay-filter="bigType">
                         <option value="" selected="">请选择省</option>
                         <option value="1" >浙江省</option>
-                        <option value="2">安徽省</option>
-                        <option value="3">江苏</option>
+                        <option value="2">山西省</option>
+                        <option value="3">江苏省</option>
                         <option value="4">陕西省</option>
                         <option value="5">湖北省</option>
                         <option value="6">湖南省</option>
@@ -125,7 +128,7 @@
             <input type="hidden" lay-submit lay-filter="submitFormFilter" id="submitForm"/>
         </form>
     </script>
-
+</security:authorize>
 
     <script>
         layui.use(['form', 'jquery', 'table', 'layer', 'util','laydate'], function(){

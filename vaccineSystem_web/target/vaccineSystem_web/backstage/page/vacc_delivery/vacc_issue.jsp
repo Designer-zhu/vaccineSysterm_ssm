@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <html>
 <head>
     <title>处理请求</title>
@@ -9,6 +10,9 @@
     <script src="${pageContext.request.contextPath}/backstage/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
+<security:authorize access="hasRole('ADMIN')">
+
+
     <%-- 隐藏域：存储项目发布路径 --%>
     <input type="hidden" id="path" value="${pageContext.request.contextPath}" />
 
@@ -117,7 +121,7 @@
         </div>
 
     </script>
-
+</security:authorize>
     <script>
         layui.use(['form', 'jquery', 'table', 'layer', 'util','laydate'], function(){
             //定义模块
@@ -217,8 +221,6 @@
                     //调用同意方法
                     agree(data);
                 }
-
-
 
                 //调用同意方法
                 function agree(data) {

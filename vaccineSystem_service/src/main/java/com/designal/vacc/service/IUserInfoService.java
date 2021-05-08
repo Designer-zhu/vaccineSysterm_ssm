@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface IUserInfoService /*extends UserDetailsService*/ {
+public interface IUserInfoService extends UserDetailsService {
 
     //注册
     boolean register(UserInfo userInfo);
@@ -20,7 +20,7 @@ public interface IUserInfoService /*extends UserDetailsService*/ {
     UserInfo login(String username, String password, String identity);
 
     //根据用户id查询用户信息
-    UserInfo viewOneByUser_id(String user_id, String identity);
+    UserInfo viewOneByUserId(Integer userId, String identity);
 
     //更新用户信息
     boolean updateUser(UserInfo userInfo);
@@ -33,6 +33,12 @@ public interface IUserInfoService /*extends UserDetailsService*/ {
 
     //查看市疾控中心人员列表
     List<UserInfo> viewCityUserList();
+
+    //查看剩余角色列表的用户信息
+    UserInfo selectOtherRoleListByUserId(Integer userId);
+
+    //通过用户名查看用户
+    UserInfo selectProOneByUsername(String username);
 
 
 }

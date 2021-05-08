@@ -7,53 +7,58 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
 
-
     <!-- 配置不拦截的资源 -->
     <security:http pattern="/css/**" security="none"/>
     <security:http pattern="/images/**" security="none"/>
     <security:http pattern="/js/**" security="none"/>
     <security:http pattern="/layui/**" security="none"/>
+    <security:http pattern="/plugins/**" security="none"/>
     <security:http pattern="/index.jsp" security="none"/>
 
-    <security:http pattern="/backstage/adminPage/login/**" security="none"/>
-    <security:http pattern="/backstage/adminPage/**" security="none"/>
-
     <security:http pattern="/backstage/css/**" security="none"/>
+    <security:http pattern="/backstage/adminPage/**" security="none"/>
+    <security:http pattern="/backstage/cityPage/**" security="none"/>
     <security:http pattern="/backstage/fonts/**" security="none"/>
     <security:http pattern="/backstage/images/**" security="none"/>
     <security:http pattern="/backstage/js/**" security="none"/>
-    <security:http pattern="/backstage/page/city_login.jsp" security="none"/>
-    <security:http pattern="/backstage/page/cityPage/**" security="none"/>
 
-    <security:http pattern="/backstage/page/pro_login.jsp" security="none"/>
     <security:http pattern="/backstage/page/login_Fail.jsp" security="none"/>
-
     <security:http pattern="/backstage/page/pro_error.jsp" security="none"/>
+    <security:http pattern="/backstage/page/pro_index.jsp" security="none"/>
+    <security:http pattern="/backstage/page/pro_login.jsp" security="none"/>
+    <security:http pattern="/backstage/page/pro_login_register.jsp" security="none"/>
     <security:http pattern="/backstage/page/pro_registerFail.jsp" security="none"/>
     <security:http pattern="/backstage/page/pro_registerSuccess.jsp" security="none"/>
+    <security:http pattern="/backstage/page/medium.jsp" security="none"/>
+    <security:http pattern="/backstage/page/403.jsp" security="none"/>
 
     <!--
     	配置具体的规则
     	auto-config="true"	不用自己编写登录的页面，框架提供默认登录页面
     	use-expressions="false"	是否使用SPEL表达式，false不支持使用
     -->
-    <security:http auto-config="true" use-expressions="false">
+    <security:http auto-config="true" use-expressions="true">
         <!--
 			配置具体的拦截的规则
 			pattern="请求路径的规则"
 			access="访问系统的人，必须有ROLE_USER或者ROLE_ADMIN的角色"
 			一旦开启SPEL表达式（use-expressions="true"）,则需要使用表达式方式（）
 		-->
-        <security:intercept-url pattern="/backstage/page/**" access="ROLE_USER,ROLE_ROOT,ROLE_ADMIN,ROLE_ORDERS"/>
-        <!--<security:intercept-url pattern="/backstage/page/**" access="hasRole('ROLE_ROOT')"/>-->
+        <!--<security:intercept-url pattern="/backstage/page/**" access="ROLE_ADMIN,ROLE_USER"/>-->
+        <security:intercept-url pattern="/backstage/page/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 
         <!-- 定义跳转的具体的页面 -->
         <security:form-login
                 login-page="/backstage/page/pro_login.jsp"
                 login-processing-url="/login.action"
-                default-target-url="/backstage/page/pro_index.jsp"
+                default-target-url="/backstage/page/medium.jsp"
                 authentication-failure-url="/backstage/page/login_Fail.jsp"
         />
+
+        <!--使其iframe窗口无需再验证-->
+        <security:headers>
+            <security:frame-options policy="SAMEORIGIN" />
+        </security:headers>
 
         <!-- 启动禁用跨站请求伪造，可自定义登录页 -->
         <security:csrf disabled="true"/>
@@ -73,6 +78,12 @@
 
     <!-- 配置加密类 -->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <!--jsr-250注解开启-->
+    <security:global-method-security jsr250-annotations="enabled"/>
+
+    <!--配置权限控制中使用表达式-->
+    <bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 
 
 </beans>

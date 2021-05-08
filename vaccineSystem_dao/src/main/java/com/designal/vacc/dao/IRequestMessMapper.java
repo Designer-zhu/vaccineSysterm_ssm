@@ -25,7 +25,7 @@ public interface IRequestMessMapper {
 
     //插入
     @Insert("insert into requestmess values(null,#{vaccineName},#{location},#{requestDate},#{vaccineSpec},#{vaccineNumber})")
-    int insert(@Param("requestMess") RequestMess requestMess);
+    int insert(RequestMess requestMess);
 
     //根据id删除
     @Delete("delete from requestmess where id = #{id}")
@@ -37,7 +37,7 @@ public interface IRequestMessMapper {
 
     //往allocation表中插入
     @Insert("insert into allocation values(#{id},#{vaccineName},#{location},#{requestDate},#{vaccineSpec},#{vaccineNumber})")
-    int insertIntoAllocation(@Param("requestMess") RequestMess requestMess);
+    int insertIntoAllocation(RequestMess requestMess);
 
     //查询allocation中的所有调拨请求One
     @Select("select * from allocation")

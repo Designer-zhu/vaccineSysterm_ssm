@@ -36,9 +36,17 @@
             <ul class="layui-nav layui-nav-tree layui-bg-cyan"  lay-filter="test">
 
                 <li class="layui-nav-item">
+                    <a href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${path}/admin/viewAllRoles.action">角色列表</a></dd>
+                        <dd><a href="${path}/admin/viewAllPermission.action">权限列表</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
                     <a href="javascript:;">省疾控中心人员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="${path}/backstage/adminPage/admin_ProUserList.jsp">查询人员列表</a></dd>
+                        <dd><a href="${path}/admin/viewAllPro.action">查询人员列表</a></dd>
                         <dd><a href="${path}/backstage/adminPage/pro_register.jsp">添加省疾控中心人员</a></dd>
                     </dl>
                 </li>
@@ -46,7 +54,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">市疾控中心人员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="${path}/backstage/adminPage/admin_CityUserList.jsp">查询人员列表</a></dd>
+                        <dd><a href="${path}/admin/viewAllCity.action">查询人员列表</a></dd>
                         <dd><a href="${path}/backstage/adminPage/city_register.jsp">添加市疾控中心人员</a></dd>
                     </dl>
                 </li>

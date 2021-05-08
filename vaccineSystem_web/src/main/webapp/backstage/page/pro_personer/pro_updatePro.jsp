@@ -20,7 +20,7 @@
     <fieldset class="layui-elem-field">
         <legend>修改</legend>
         <div class="layui-field-box">
-            <form class="layui-form" action="${pageContext.request.contextPath}/user/updateUser.action" method="post" lay-filter="example" <%--enctype="multipart/form-data"--%>>
+            <form class="layui-form" action="${pageContext.request.contextPath}/user/updateUser.action" method="post" lay-filter="example" enctype="multipart/form-data">
                 <input type="hidden" name="userId" value="${pro_user.userId}">
 
                 <div class="layui-form-item">

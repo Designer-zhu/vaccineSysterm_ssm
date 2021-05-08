@@ -10,4 +10,8 @@ public interface IPermissionMapper {
     //根据角色Id查询对象的权限信息表
     @Select("select * from permission where id in(select permissionId from role_permission where roleId = #{roleId})")
     List<Permission> selectPermissionListByRoleId(int roleId);
+
+    //根据角色Id查询剩余的权限信息表
+    @Select("select * from permission where id not in(select permissionId from role_permission where roleId = #{roleId})")
+    List<Permission> selectOtherPermissionListByRoleId(int roleId);
 }

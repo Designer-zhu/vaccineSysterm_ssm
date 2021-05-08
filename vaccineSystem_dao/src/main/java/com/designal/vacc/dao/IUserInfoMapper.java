@@ -11,12 +11,12 @@ public interface IUserInfoMapper {
     //插入用户至用户表One
     @Insert("insert into pro_user values(null,#{username},#{password},#{sex},#{email}," +
             "#{birthday},#{telephone},'',0,#{code},#{identity})")
-    int insertOneOne(@Param("userInfo") UserInfo userInfo);
+    int insertOneOne(UserInfo userInfo);
 
     //插入用户至用户表Two
     @Insert("insert into city_user values(null,#{username},#{password},#{sex},#{email}," +
             "#{birthday},#{telephone},'',0,#{code},#{identity})")
-    int insertOneTwo(@Param("userInfo") UserInfo userInfo);
+    int insertOneTwo(UserInfo userInfo);
 
     //验证用户激活码 更新状态One
     @Update("update pro_user set state = 1 where code = #{code}")
@@ -44,11 +44,25 @@ public interface IUserInfoMapper {
 
     //根据用户id查询用户信息One
     @Select("select * from pro_user where userId = #{userId}")
-    UserInfo selectOneOne2(@Param("userId") String userId);
+    @Results({
+            @Result(id = true,property = "userId",column = "userId"),
+            @Result(property = "username",column = "username"),
+            @Result(property = "password",column = "password"),
+            @Result(property = "sex",column = "sex"),
+            @Result(property = "identity",column = "identity"),
+            @Result(property = "email",column = "email"),
+            @Result(property = "birthday",column = "birthday"),
+            @Result(property = "telephone",column = "telephone"),
+            @Result(property = "photo",column = "photo"),
+            @Result(property = "state",column = "state"),
+            @Result(property = "code",column = "code"),
+            @Result(property = "roles",column = "userId",javaType = List.class,many = @Many(select = "com.designal.vacc.dao.IRoleMapper.selectRolesListByUserId")),
+    })
+    UserInfo selectOneOne2(@Param("userId") Integer userId);
 
     //根据用户id查询用户信息Two
     @Select("select * from city_user where userId = #{userId}")
-    UserInfo selectOneTwo2(@Param("userId") String userId);
+    UserInfo selectOneTwo2(@Param("userId") Integer userId);
 
     //修改信息
     @Update("update pro_user " +
@@ -82,7 +96,25 @@ public interface IUserInfoMapper {
             @Result(property = "photo",column = "photo"),
             @Result(property = "state",column = "state"),
             @Result(property = "code",column = "code"),
-            @Result(property = "roles",column = "userId",javaType = List.class,many = @Many(select = "com.designal.vacc.dao.IRoleMapper.selectRolesListByuserId")),
+            @Result(property = "roles",column = "userId",javaType = List.class,many = @Many(select = "com.designal.vacc.dao.IRoleMapper.selectRolesListByUserId")),
     })
     UserInfo selectProOneByUsername(@Param("username") String username);
+
+    //查看剩余角色用户信息
+    @Select("select * from pro_user where userId = #{userId}")
+    @Results({
+            @Result(id = true,property = "userId",column = "userId"),
+            @Result(property = "username",column = "username"),
+            @Result(property = "password",column = "password"),
+            @Result(property = "sex",column = "sex"),
+            @Result(property = "identity",column = "identity"),
+            @Result(property = "email",column = "email"),
+            @Result(property = "birthday",column = "birthday"),
+            @Result(property = "telephone",column = "telephone"),
+            @Result(property = "photo",column = "photo"),
+            @Result(property = "state",column = "state"),
+            @Result(property = "code",column = "code"),
+            @Result(property = "roles",column = "userId",javaType = List.class,many = @Many(select = "com.designal.vacc.dao.IRoleMapper.selectOtherRoleListByUserId")),
+    })
+    UserInfo selectOtherRoleListByUserId(Integer userId);
 }

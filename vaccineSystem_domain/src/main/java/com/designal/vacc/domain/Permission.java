@@ -11,15 +11,16 @@ public class Permission {
 
     private Integer id;
     private String permissionName;
+    private String url;
     private List<Role> roles;
-
 
     public Permission() {
     }
 
-    public Permission(Integer id, String permissionName, List<Role> roles) {
+    public Permission(Integer id, String permissionName, String url, List<Role> roles) {
         this.id = id;
         this.permissionName = permissionName;
+        this.url = url;
         this.roles = roles;
     }
 
@@ -57,6 +58,22 @@ public class Permission {
 
     /**
      * 获取
+     * @return url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * 设置
+     * @param url
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * 获取
      * @return roles
      */
     public List<Role> getRoles() {
@@ -72,6 +89,6 @@ public class Permission {
     }
 
     public String toString() {
-        return "Permission{id = " + id + ", permissionName = " + permissionName + ", roles = " + roles + "}";
+        return "Permission{id = " + id + ", permissionName = " + permissionName + ", url = " + url + ", roles = " + roles + "}";
     }
 }

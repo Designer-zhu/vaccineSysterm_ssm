@@ -39,7 +39,7 @@
                     <a href="index.jsp" class="active">首页</a>
                 </li>
                 <li>
-                    <a href="${path}/backstage/page/adminPage/login/admin_login.jsp">管理员登录</a>
+                    <a href="${path}/backstage/adminPage/login/admin_login.jsp">管理员登录</a>
                 </li>
                 <li>
                     <a href="index.jsp">帮助</a>
@@ -73,7 +73,7 @@
                                 <a class="btn  text-white  scroll" href="${path}/backstage/page/pro_login.jsp">省疾控中心 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn  text-white bg-dark scroll" href="${path}/backstage/page/city_login.jsp">市疾控中心</a>
+                                <a class="btn  text-white bg-dark scroll" href="${path}/backstage/cityPage/city_login.jsp">市疾控中心</a>
                             </li>
                             <li class="list-inline-item">
                                 <a class="btn  text-white bg-dark scroll" href="${path}/backstage/page/pro_index.jsp">浏览</a>
